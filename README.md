@@ -13,10 +13,20 @@ Given a record of every transaction during a three month period, calculate the r
 ·         Check solution into GitHub
 
 
+### Step to run project
+
+·         Clone project into local reposetory.
+·         run **npm install** to install all the required libraries.
+·         run **npm start** to start project.
+
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Install all the required libraries.
 
 ### `npm start`
 
