@@ -4,8 +4,10 @@ import fetch from '../app/helper/SeedData';
 import {getPointsByCustMonth,getTotalPointsByCust} from '../app/helper/HelperFunctions';
 import {tableIcons} from '../app/helper/IconRefs';
 import MaterialTable from 'material-table';
+import {useHistory} from 'react-router-dom';
 
 function MainPage() {
+    const history = useHistory();
     const [totalPointState,setTotalPointState] = useState(null)
     const [pointByMth,setPointByMth] = useState(null)
     useEffect(() => { 
@@ -25,11 +27,11 @@ function MainPage() {
         ];
         let data=[];
         pointByMth.forEach((o)=>{
-          data.push({name:o.name,month:o.month,points:o.points})
+          data.push({name:o.name,month:o.month,points:o.points,details:o.transDetail})
         })
         return {columns,data}
     };
-
+    console.log(pointByMth);
     return (
         <>
         {!!totalPointState && !!pointByMth ? 
@@ -46,6 +48,18 @@ function MainPage() {
             <h3>Points in each month</h3>
             <div style={{ maxWidth: '100%' }}>
                 <MaterialTable
+                 actions={[
+                    {
+                      icon: tableIcons.Visibility,
+                      tooltip: 'Save User',
+                      onClick: (event, rowData) => {
+                        history.push({
+                          pathname: '/details',
+                          state: { name:rowData.name,month:rowData.month,detail: rowData.details}
+                        })
+                      }
+                    }
+                  ]}
                 icons={tableIcons}
                 columns={getTableData().columns}
                 data={getTableData().data}
